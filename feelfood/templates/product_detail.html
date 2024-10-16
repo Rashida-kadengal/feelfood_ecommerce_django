@@ -16,7 +16,7 @@ Feelfood{%endblock %} {% block content %}
             {% csrf_token %}
                     
               {%if product.stock > 0 %}
-              <input type="number" id="quantity" class="form-control w-25" name="quantity" value="1" min="1">
+              <input type="number" id="quantity" class="form-control w-25" name="quantity" value="1" min="1" max={{product.stock}}>
               <button type="submit" class="btn btn-primary w-75 my-2">Add to Cart</button>
               {%else%}
               <button type="submit" class="btn btn-danger w-75 my-2 disabled">Out of stock</button>
@@ -28,7 +28,7 @@ Feelfood{%endblock %} {% block content %}
           <form action="{% url 'buy_now' product_id=product.id %}" method="post">
             {% csrf_token %}
             {%if product.stock > 0 %}
-                <input type="number" id="quantity" class="form-control w-25" name="quantity" value="1" min="1">
+                <input type="number" id="quantity" class="form-control w-25" name="quantity" value="1" min="1" max={{product.stock}}>
             <button type="submit" class="btn btn-warning w-75 my-2">Buy Now</button>
             {% endif %}
         </form>
