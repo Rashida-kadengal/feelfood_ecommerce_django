@@ -18,25 +18,6 @@ def about_us(request):
     return render(request, 'aboutus.html')
 
 
-# def product_list(request):
-#     query = request.GET.get('search', '')  # Get the search query from the request
-#     if query:
-#          products = products.filter(
-#             Q(name__icontains=query) |
-#             Q(description__icontains=query)
-#         )  # Filter products by name
-#     else:
-#         products = Product.objects.all()  # Get all products if no query is provided
-
-#     context = {
-#         'products': products,
-#         'query': query  # Pass the query back to the template to display in the search box
-#     }
-#     return render(request, 'product_list.html', context)
-
-# views.py
-from django.shortcuts import render
-from .models import Product  # Make sure to import your Product model
 
 def product_list(request):
     query = request.GET.get('search', '')  # Get the search query from the request
@@ -80,9 +61,6 @@ def create_product_review(request,product_id):
     
 
 
-
-from django.contrib import messages
-
 @login_required
 def delete_product_review(request, product_id, review_id):
     product = get_object_or_404(Product, pk=product_id)
@@ -95,11 +73,6 @@ def delete_product_review(request, product_id, review_id):
         messages.error(request, "You are not authorized to delete this review.")
 
     return redirect('product_detail', product_id=product.id)
-
-
-
-
-
 
 
 @login_required
@@ -122,8 +95,6 @@ def add_to_cart(request, product_id):
         # If it already exists, add the quantity to the existing quantity
         cart_item.quantity += quantity
 
-    # if not created:
-    #     cart_item.quantity += 1
     cart_item.save()
     
     return redirect('cart')
@@ -144,8 +115,6 @@ def buy_now(request, product_id):
         # If it already exists, add the quantity to the existing quantity
         cart_item.quantity += quantity
 
-    # if not created:
-    #     cart_item.quantity += 1
     cart_item.save()
 
     # Redirect to the checkout page with the current cart
