@@ -12,6 +12,17 @@ def home(request):
     return render(request, 'home.html', {'products': products})
 
 def contact_us(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        
+        # Here you would typically send an email or save the contact form data
+        # For now, we'll just add a success message
+        messages.success(request, 'Thank you for your message. We will get back to you soon!')
+        return redirect('contact_us')
+    
     return render(request, 'contactus.html')
 
 def about_us(request):
