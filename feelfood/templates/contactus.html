@@ -18,9 +18,10 @@ Contact us-feelfood
                 </label>
                 <input
                   type="text"
-                  
+                  name="name"
                   class="form-control"
                   id="exampleInputName1"
+                    required
                 />
               </div>
 
@@ -32,21 +33,25 @@ Contact us-feelfood
                   type="email"
                   class="form-control"
                   id="exampleInputEmail1"
+                    name="mail"
                   aria-describedby="emailHelp"
+                    required
                 />
                 <div id="emailHelp" class="form-text">
                   We'll never share your email with anyone else.
                 </div>
               </div>
 
-              <div class="mb-3">
-                <label for="exampleInputPhoneNumber1" class="form-label">
-                  Phone Number
+                 <div class="mb-3">
+                <label for="exampleInputSubject1" class="form-label">
+                  Subject
                 </label>
                 <input
-                  type="number tel"
+                  type="text"
+                  name="subject"
                   class="form-control"
-                  id="exampleInputPhoneNumber1"
+                  id="exampleInputSubject1"
+                    required
                 />
               </div>
 
@@ -54,7 +59,7 @@ Contact us-feelfood
                 <label for="exampleInputMessage1" class="form-label">
                   Message
                 </label>
-               <textarea class="form-control" rows={4}></textarea>
+               <textarea class="form-control" rows={4} name="message" reqired></textarea>
               </div>
 
               <div class="mb-3 form-check">
@@ -62,15 +67,14 @@ Contact us-feelfood
                   type="checkbox"
                   class="form-check-input"
                   id="exampleCheck1"
+                    required
                 />
                 <label class="form-check-label" for="exampleCheck1">
                   Agree
                 </label>
                 
               </div>
-              <div class="col mb-4">
-               <a class="text-danger text-decoration-none" href="#">Contact Me?</a>
-                            </div>
+              
               <button type="submit" class="btn btn-warning">
                 Submit
               </button>
