@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% block title %}My Orders - Feelfood{% endblock %}
+{% block content %}
+<h1 class="mb-4">My Orders</h1>
+
+{% if orders %}
+<div class="accordion" id="ordersAccordion"  style="margin-bottom:278px" >
+  {% for order in orders %}
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading{{ order.id }}">
+      <button
+        class="accordion-button collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapse{{ order.id }}"
+        aria-expanded="false"
+        aria-controls="collapse{{ order.id }}"
+      >
+        Order #{{ order.id }} - {{ order.created_at|date:"F j, Y" }} - ${{order.total}}
+      </button>
+    </h2>
+    <div
+      id="collapse{{ order.id }}"
+      class="accordion-collapse collapse"
+      aria-labelledby="heading{{ order.id }}"
+      data-bs-parent="#ordersAccordion"
+    >
+      <div class="accordion-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in order.items.all %}
+            <tr>
+              <td>{{ item.product.name }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>${{ item.price }}</td>
+              <td>${{ item.total_price }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3"><strong>Total:</strong></td>
+              <td><strong>${{ order.total }}</strong></td>
+            </tr>
+          </tfoot>
+        </table>
+        <p><strong>Status:</strong> {{ order.status }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p style="margin-bottom:307px">
+  You haven't placed any orders yet.
+  <a href="{% url 'product_list' %}">Start shopping</a>
+</p>
+{% endif %} {% endblock %}

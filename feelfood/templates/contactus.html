@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block  title%}
+Contact us-feelfood
+{% endblock %}
+{% block content%}
+<div class="container">
+    <div class="row mb-4">
+       <div class="col-md-6 d-flex align-items-center py-5 mt-5">
+            <img src="https://static.vecteezy.com/system/resources/previews/007/620/779/non_2x/male-customer-support-phone-operator-with-headset-working-in-call-center-concept-illustration-free-vector.jpg" class="img-fluid"></img>
+        
+        </div> 
+        
+        <div class="col-md-6 py-5 mt-5">
+         <form>
+              <div class="mb-3">
+                <label for="exampleInputName1" class="form-label">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  
+                  class="form-control"
+                  id="exampleInputName1"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">
+                  Email address
+                </label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                />
+                <div id="emailHelp" class="form-text">
+                  We'll never share your email with anyone else.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputPhoneNumber1" class="form-label">
+                  Phone Number
+                </label>
+                <input
+                  type="number tel"
+                  class="form-control"
+                  id="exampleInputPhoneNumber1"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputMessage1" class="form-label">
+                  Message
+                </label>
+               <textarea class="form-control" rows={4}></textarea>
+              </div>
+
+              <div class="mb-3 form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="exampleCheck1"
+                />
+                <label class="form-check-label" for="exampleCheck1">
+                  Agree
+                </label>
+                
+              </div>
+              <div class="col mb-4">
+               <a class="text-danger text-decoration-none" href="#">Contact Me?</a>
+                            </div>
+              <button type="submit" class="btn btn-warning">
+                Submit
+              </button>
+            </form>
+            
+            </div>
+    </div>
+
+
+</div>
+
+{% endblock%}

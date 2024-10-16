@@ -1,0 +1,95 @@
+{% extends 'base.html' %} {% block title %}{{ product.name }} -
+Feelfood{%endblock %} {% block content %}
+<div class="row column-gap-5 mb-5">
+  <div class="col-md-6" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 3px 7px;" >
+    <div class="row" >
+        <img
+        src="{{ product.image_url }}"
+        class="img-fluid object-fit-cover"
+        alt="{{ product.name }}"
+     style="height: 50vh;"
+     /> 
+    </div>
+    <div class="row mt-4 mb-4">
+        <div class="col-md-6">
+        <form method="post" action="{% url 'add_to_cart' product.id %}">
+            {% csrf_token %}
+                    
+              {%if product.stock > 0 %}
+              <input type="number" id="quantity" class="form-control w-25" name="quantity" value="1" min="1">
+              <button type="submit" class="btn btn-primary w-75 my-2">Add to Cart</button>
+              {%else%}
+              <button type="submit" class="btn btn-danger w-75 my-2 disabled">Out of stock</button>
+              {% endif %}
+        </form>
+        </div>
+            
+        <div class="col-md-6">
+          <form action="{% url 'buy_now' product_id=product.id %}" method="post">
+            {% csrf_token %}
+            {%if product.stock > 0 %}
+                <input type="number" id="quantity" class="form-control w-25" name="quantity" value="1" min="1">
+            <button type="submit" class="btn btn-warning w-75 my-2">Buy Now</button>
+            {% endif %}
+        </form>
+    </div>
+        
+    </div>
+  </div>
+  <div class="col-md-5">
+    <h1 class="mb-4">{{ product.name }}</h1>
+    <p class="lead">${{ product.price }}</p>
+    <p>{{ product.description }}</p>
+    <p>In stock: {{ product.stock }}</p>
+
+  </div>
+</div>
+
+<div class="row column-gap-2 mt-5 mb-5">
+    <div class="col-md-5 p-4" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 3px 7px;" >
+     <h3>Reviews</h3>
+      <div class="card p-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 3px 7px;">
+    <div class="card-body">
+    {% for review in reviews %}
+        {%if review.product_image%}
+        <img src="{{review.product_image.url}}" class=" img-fluid" alt="product name" style="max-width:300px,">
+        {% else %}
+        <p>can't load the product review image</p>
+        {%endif%}
+      <h5 class="card-title">{{review.title}}</h5>
+      <p class="card-text">{{review.review_text}}</p>
+      <p class="card-text">Review:{{review.review}}/5</p>
+      <p class="card-text text-muted">Reviewed by:{{review.user.username}} on {{review.created_at}}</p>
+      <a href="{% url 'delete_product_review' product_id=product.id review_id=review.id %}">Delete review</a>
+        {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        <hr>
+        {%empty%}
+        <p>no reviews yet. Be the first to review this product!</p>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 p-4 " style="box-shadow: rgba(149, 157, 165, 0.2) 0px 3px 7px;">
+    <h3>Write a review</h3>
+    <form method="POST" action="{% url 'create_product_review' product.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_div}}
+        <button class="btn btn-primary mt-3">Submit review</button>
+    </form>
+</div>
+
+
+</div>
+
+
+
+
+
+{% endblock %}

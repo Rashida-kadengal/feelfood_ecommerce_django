@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block title %}Login - Feelfood{% endblock %}
+{%block content %}
+<div class="row justify-content-center mt-5">
+  <div class="col-md-6 ">
+   
+    <form method="post" class="bg-dark p-5 mb-5 w-100 rounded" >
+      {% csrf_token %}
+      <h1 class="mb-4 text-light d-flex justify-content-center">Login</h1>
+      <div class="mb-3">
+        <label for="username" class="form-label text-light">Username</label>
+        <input
+          type="text"
+          class="form-control rounded-pill"
+          id="username"
+          name="username"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label text-light">Password</label>
+        <input
+          type="password"
+          class="form-control rounded-pill"
+          id="password"
+          name="password"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-warning w-100 my-3 rounded-pill">Login</button>
+      <p class=" text-light d-flex justify-content-center">
+        Don't have an account? <a href="{% url 'signup' %}" class="text-success text-decoration-none fw-bold">Sign up</a>
+      </p>
+    </form>
+   
+  </div>
+</div>
+{% endblock %}
